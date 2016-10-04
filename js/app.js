@@ -120,7 +120,6 @@ function getAnswerers(tag) {
         tag: tag
     };
 
-    console.log("getAnswerers called");
     $.ajax({
             url: "http://api.stackexchange.com/2.2/tags/" + tag + "/top-answerers/month?page=3&pagesize=5&site=stackoverflow",
             data: request,
@@ -128,8 +127,6 @@ function getAnswerers(tag) {
             type: "GET"
         })
         .done(function (data) {
-            console.log(data);
-            console.log(data.items.length);
             var answererResults = showSearchResults(request.tag, data.items.length);
 
             $('.search-results2').html(answererResults);
@@ -151,7 +148,7 @@ $(document).ready(function () {
     $('.inspiration-getter').submit(function (e) {
         e.preventDefault();
         // zero out results if previous search has run
-        $('.results').html('');
+        $('.results2').html('');
         // get the value of the tags the user submitted
         var answerers = $(this).find("input[name='answerers']").val();
         getAnswerers(answerers);
